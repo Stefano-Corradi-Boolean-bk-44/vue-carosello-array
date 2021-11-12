@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carosello News</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+    <div id="app">
+        <div class="container">
+            <div class="slider">
+    
+                
+                <div tabindex="0"
+                    @mouseover="stopAutoScroll"
+                    @mouseleave="autoScroll"
+                    @keyup.up="nextSlide"
+                    @keyup.down="prevSlide"
+                class="items">
+                <!-- item -->
+                     <div class="item">
+                        <img :src="slides[activeSlide].image" alt="">
+                        <div class="text">
+                            <h2>{{slides[activeSlide].title}}</h2>
+                            <p>{{slides[activeSlide].text}}</p>
+                        </div>
+                    </div>
+                    <!-- /item -->
+                </div>
+                
+    
+                <div class="thumbs">
+                    <div @click="prevSlide" class="prev"> &uarr; </div>
+                    <div @click="nextSlide" class="next"> &darr; </div>
+
+                    <!--
+                        condizione della classe attiva con operatore ternario
+                        :class="index === activeSlide ? 'active' : ''" -->
+                    <div
+                        v-for="(slide, index) in slides"
+                        @click="activeSlide = index"
+                        :class="{'active': index === activeSlide}"
+                        class="thumb"
+                    >
+                        <img :src="slide.image" 
+                        :alt="slide.title" 
+                        :title="slide.title">
+                    </div>
+          
+                </div>
+    
+            </div>
+        </div>
+    </div>
+
+
+   <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+   <script src="js/script.js"></script>
+</body>
+</html>
